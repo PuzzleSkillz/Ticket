@@ -1,0 +1,25 @@
+<h1>Tickets</h1>
+
+<% if @tickets.empty? %>
+	<b>Tickets dont created</b>
+<% else %>
+	<table class="tickets">
+		<tr>
+			<th>Номер задачи</th>
+			<th>Заголовок</th>
+			<th>ФИО администратора</th>
+			<th>Статус</th>
+		</tr>
+
+		<% @tickets.each do |i| %>
+		
+			<tr data-item_id="<%= i.id %>">
+				<td><%= i.id %></td>
+				<td><%= i.title %></td>
+				<td><%= i.admin_fio %></td>
+				<td><%= i.status %></td>
+			</tr>
+
+		<% end %>
+	</table>
+<% end %>

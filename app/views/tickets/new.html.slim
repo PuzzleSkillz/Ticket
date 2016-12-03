@@ -1,0 +1,9 @@
+    h1 Create new ticket
+	
+	= form_for @ticket do |f|
+	  p Заголовок:
+	  = f.text_field :title
+	  p Описание:
+	  = f.text_area :content
+	  br
+	  = f.submit "Создать задачу"
