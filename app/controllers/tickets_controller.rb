@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
 
-
-  before_action :check_if_admin, only: [:edit, :update, :new, :create, :destroy]
+  before_action :find_item, only: [:show, :edit, :update, :destroy]
+  # before_action :check_if_admin, only: [:edit, :update, :new, :create, :destroy]
 
   def index
   	@tickets = Ticket.all
@@ -37,6 +37,12 @@ class TicketsController < ApplicationController
 
   # /tickets/1 PUT
   def update
+  	@ticket.update_attributes(ticket_params)
+  	if @ticket.errors.empty?
+  	  redirect_to ticket_path(@ticket)
+  	else
+  	  render "edit"
+  	end
   end
 
   # /tickets/1 DELETE
@@ -45,8 +51,13 @@ class TicketsController < ApplicationController
 
   private
 
+    def find_item
+	  @ticket = Ticket.where(id: params[:id]).first
+	  render_404 unless @ticket
+	end
+
     def ticket_params
-	  params.require(:ticket).permit(:title, :content, :status, :user_id)		
+	  params.require(:ticket).permit(:title, :content, :status, :admin_fio)		
 	end
 
 	# def check_if_admin
