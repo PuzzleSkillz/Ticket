@@ -19,8 +19,18 @@
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
            </button>
-           <a class="navbar-brand" href="#">Brand</a>
+           <a class="navbar-brand" href="/">Главная</a>
         </div>
+        <ul class = "nav navbar-nav navbar-right">
+            <% if current_user %>   
+              <li><%= current_user.email %></li>
+              <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete  %></li>   
+            <% else%>   
+              <li><%= link_to 'Sign in', new_user_session_path %></li>
+              <li><%= link_to 'Registration', new_user_registration_path %></li>   
+            <% end %>   
+          
+        </ul>
       </div>
     </nav>
     

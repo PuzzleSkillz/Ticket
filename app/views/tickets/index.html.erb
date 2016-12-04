@@ -18,6 +18,7 @@
 				<td><%= i.title %></td>
 				<td><%= i.admin_fio %></td>
 				<td><%= i.status %></td>
+				<td><%= link_to "Удалить", ticket_path(i, current_user.admin == true), method: :delete, data: { confirm: "Точно удалить?" }%></td> 	
 			</tr>
 
 		<% end %>

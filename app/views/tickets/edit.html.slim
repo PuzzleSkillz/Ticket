@@ -1,0 +1,13 @@
+    h1 Edit new ticket
+	
+	= form_for @ticket do |f|
+	  p Заголовок:
+	  = f.text_field :title
+	  p Описание:
+	  = f.text_area :content
+	  p ФИО администратора:
+	  = f.text_field :admin_fio
+	  p Статус:
+	  = f.text_field :status
+	  br
+	  = f.submit "Сохранить"

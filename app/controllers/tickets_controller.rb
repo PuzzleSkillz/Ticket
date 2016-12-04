@@ -1,16 +1,19 @@
 class TicketsController < ApplicationController
 
-  before_action :find_item, only: [:show, :edit, :update, :destroy]
-  # before_action :check_if_admin, only: [:edit, :update, :new, :create, :destroy]
+  before_action :find_item, only: [:show, :create, :edit, :new]
+  before_action :check_if_admin, only: [:edit, :update, :destroy]
 
   def index
-  	@tickets = Ticket.all
-  	# render text: @tickets.map { |i| "#{i.title}: #{i.status}: #{i.created_at}"}.join("br/") 
+    if user_signed_in?
+  	  @tickets = current_user.tickets.all
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # /tickets/1 GET
   def show
-  	@ticket = Ticket.where(id: params[:id]).first
+  	@ticket = current_user.tickets.where(id: params[:id]).first
   	unless @ticket 
       render text: "Page not found", status: 404
   	end
@@ -23,7 +26,7 @@ class TicketsController < ApplicationController
 
   # /tickets POST
   def create
-  	@ticket = Ticket.create(ticket_params)
+  	@ticket = current_user.tickets.create(ticket_params)
   	if @ticket.errors.empty?
   	  redirect_to ticket_path(@ticket)
   	else
@@ -47,22 +50,23 @@ class TicketsController < ApplicationController
 
   # /tickets/1 DELETE
   def destroy
+    @ticket.destroy
+    redirect_to action: "index"
   end
 
   private
 
-    def find_item
-	  @ticket = Ticket.where(id: params[:id]).first
-	  render_404 unless @ticket
+  def find_item
 	end
 
-    def ticket_params
-	  params.require(:ticket).permit(:title, :content, :status, :admin_fio)		
+  def ticket_params
+	  params.require(:ticket).permit(:title, :content, :status, :admin_fio, :user_id)		
 	end
 
-	# def check_if_admin
- #      @check = params.require(:user).permit(:admin)
- #      render text: "Acces denied", status: 403 unless @check == 1
-	# end
+	def check_if_admin
+    @ticket = Ticket.find(params[:id])
+    render_404 unless @ticket
+    render text: "Acces denied", status: 403 unless current_user.admin == true
+	end
 
 end
