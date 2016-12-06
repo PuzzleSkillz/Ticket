@@ -2,7 +2,6 @@ class TicketsController < ApplicationController
 
   before_action :find_item, only: [:show, :create, :new]
   before_action :check_if_admin, only: [ :edit, :update, :destroy]
-# :edit, :update,
   def index
     if user_signed_in?
       @comp = current_user.company_name
