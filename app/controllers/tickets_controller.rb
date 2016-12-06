@@ -2,7 +2,6 @@ class TicketsController < ApplicationController
 
   before_action :find_item, only: [:show, :create, :new]
   before_action :check_if_admin, only: [ :edit, :update, :destroy]
-# :edit, :update,
   def index
     if user_signed_in?
       @comp = current_user.company_name
@@ -19,7 +18,7 @@ class TicketsController < ApplicationController
   # /tickets/1 GET
   def show
     if user_signed_in?
-  	  @ticket = current_user.tickets.where(id: params[:id]).first
+  	  @ticket = Ticket.where(id: params[:id]).first
       render_404 unless @ticket
     else
       redirect_to new_user_session_path
