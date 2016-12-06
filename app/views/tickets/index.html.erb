@@ -7,7 +7,6 @@
 		<tr>
 			<th>Номер задачи</th>
 			<th>Заголовок</th>
-			<th>ФИО администратора</th>
 			<th>Статус</th>
 		</tr>
 
@@ -15,10 +14,8 @@
 		
 			<tr data-item_id="<%= i.id %>">
 				<td><%= i.id %></td>
-				<td><%= i.title %></td>
-				<td><%= i.admin_fio %></td>
+				<td><%= link_to i.title, ticket_path(i) %></td>
 				<td><%= i.status %></td>
-				<td><%= link_to "Удалить", ticket_path(i, current_user.admin == true), method: :delete, data: { confirm: "Точно удалить?" }%></td> 	
 			</tr>
 
 		<% end %>

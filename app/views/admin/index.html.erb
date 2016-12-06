@@ -1,0 +1,63 @@
+<h1>Задачи</h1>
+
+<% if @show_tickets.empty? %>
+	<b>Tickets dont created</b>
+<% else %>
+	<table class="tickets">
+		<tr>
+			<th>Номер задачи</th>
+			<th>Заголовок</th>
+			<th>ФИО администратора</th>
+			<th>Статус</th>
+		</tr>
+
+		<% @show_tickets.each do |i| %>
+		
+			<tr data-item_id="<%= i.id %>">
+				<td><%= i.id %></td>
+				<td><%= link_to i.title, admin_path(i) %></td>
+				<td><%= i.admin_fio %></td>
+				<td><%= i.status %></td>
+				<td><%= link_to "Удалить", ticket_path(i, current_user.admin == true), method: :delete, data: { confirm: "Точно удалить?" }%></td> 	
+			</tr>
+
+		<% end %>
+	</table>
+<% end %>
+<br>
+
+<h1>Пользователи</h1>
+<% if @show_users.empty? %>
+	<b>Users dont created</b>
+<% else %>
+	<table class="users">
+		<tr>
+			<th> № </th>
+			<th> Логин </th>
+			<th> Наименование компании </th>
+			<th> ФИО контактного лица </th>
+			<th> Телефон </th>
+			<th> Адрес сайта </th>
+			<th> Описание </th>
+			<th> Дата последнего визита </th>
+		</tr>
+
+		<% @show_users.each do |i| %>
+		
+			<tr data-item_id="<%= i.id %>">
+				<td> <%= i.id %> </td>
+				<td> <%= i.login%> </td>
+				<td> <%= i.company_name%> </td>
+				<td> <%= i.contact_fio%> </td>
+				<td> <%= i.telephone%> </td>
+				<td> <%= i.site_name%> </td>
+				<td> <%= i.description%> </td>
+				<td> <%= i.updated_at%> </td>
+				<td><%= link_to "Удалить", edit_user_registration_path(i, current_user.admin == true), method: :delete, data: { confirm: "Точно удалить?" }%></td> 
+			</tr>
+
+		<% end %>
+	</table>
+<% end %>
+<br>
+<br>
