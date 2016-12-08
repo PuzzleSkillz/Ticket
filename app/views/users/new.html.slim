@@ -1,0 +1,23 @@
+    h1 Create new user
+	
+	= form_for @user do |f|
+	  p email:
+	  = f.text_field :email
+	  p login:
+	  = f.text_field :login
+	  p Наименование компании:
+	  = f.text_field :company_name
+	  p ФИО контактного лица:
+	  = f.text_field :contact_fio
+	  p Телефон:
+	  = f.text_field :telephone
+	  p Адрес сайта:
+	  = f.text_field :site_name
+	  p Пароль:
+	  = f.password_field :password, autocomplete: "off"
+	  p Пароль:
+	  = f.password_field :password_confirmation, autocomplete: "off"
+	  p Админ:
+	  = f.check_box :admin
+	  br
+	  = f.submit "Создать"

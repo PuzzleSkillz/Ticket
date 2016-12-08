@@ -19,7 +19,12 @@ class [scope]::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   # def update
-  #   super
+  #   @user.update_attributes(configure_account_update_params)
+  #   if @user.errors.empty?
+  #     redirect_to user_path(@user)
+  #   else
+  #     render "edit"
+  #   end
   # end
 
   # DELETE /resource
@@ -45,7 +50,8 @@ class [scope]::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+  #   @user = User.find(params[:id])
+  #   devise_parameter_sanitizer.permit(:account_update, keys: [:login, :company_name, :company_name, :contact_fio, :telephone, :site_name])
   # end
 
   # The path used after sign up.

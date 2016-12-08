@@ -1,0 +1,6 @@
+    h2 Comments
+	
+	= form_for ticket_comment_index_path do |f|
+	  p new comment
+	  = f.text_field :body
+	  = f.submit "Сохранить"

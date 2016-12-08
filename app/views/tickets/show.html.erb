@@ -5,3 +5,24 @@
 	<li> ФИО администратора: <%= @ticket.admin_fio %></li>
 	<li> Статус: <%= @ticket.status %></li>
 </ul>
+
+<h2>Comments</h2>
+<% @ticket.comments.each do |f| %>
+  <p>
+    <%= f.user %>
+  </p>
+ 
+  <p>
+    <strong>Comment:</strong>
+    <%= f.body %>
+  </p>
+<% end %>
+
+<h2>New comment</h2>
+	<%=form_for ([@ticket, @ticket.comments.build]) do |f| %>
+	  <%= f.text_area :body %> <br>
+	  <%= f.submit "Сохранить"%>
+	<% end %>
+
+
+

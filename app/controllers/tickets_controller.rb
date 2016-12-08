@@ -1,10 +1,10 @@
 class TicketsController < ApplicationController
 
-  before_action :find_item, only: [:show, :create, :new]
+  before_action :find_item, only: [:show, :comment]
   before_action :check_if_admin, only: [ :edit, :update, :destroy]
   def index
     if user_signed_in?
-      @comp = current_user.company_name
+      
   	  @tickets = Ticket.where(company_name: @comp)
     else
       redirect_to new_user_session_path
@@ -60,9 +60,13 @@ class TicketsController < ApplicationController
     redirect_to action: "index"
   end
 
+  def comment
+  end
+
   private
 
   def find_item
+    @ticket = Ticket.find(params[:id])
 	end
 
   def ticket_params
