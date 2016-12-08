@@ -21,9 +21,18 @@
            </button>
            <a class="navbar-brand" href="/">Главная</a>
         </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+          <% if user_signed_in? %>
+            <li class="active"><a href="/tickets/new">Создать задачу <span class="sr-only">(current)</span></a></li>
+            <% if user_signed_in? && current_user.admin == true %>   
+              <li><a href="/users/new">Создать аккаунт</a></li> 
+            <% end %> 
+          <% end %>  
+          </ul>
         <ul class = "nav navbar-nav navbar-right">
             <% if current_user %>   
-              <li><%= current_user.email %></li>
+              <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
               <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete  %></li>   
             <% else%>   
               <li><%= link_to 'Sign in', new_user_session_path %></li>

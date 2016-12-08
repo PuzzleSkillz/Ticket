@@ -18,7 +18,7 @@
 				<td><%= link_to i.title, admin_path(i) %></td>
 				<td><%= i.admin_fio %></td>
 				<td><%= i.status %></td>
-				<td><%= link_to "Удалить", ticket_path(i, current_user.admin == true), method: :delete, data: { confirm: "Точно удалить?" }%></td> 	
+				<td><%= link_to "Удалить", ticket_path(i, current_user.admin == true), method: :delete, data: { confirm: "Точно удалить?" }, class: "btn btn-danger"%></td> 	
 			</tr>
 
 		<% end %>
@@ -53,7 +53,7 @@
 				<td> <%= i.site_name%> </td>
 				<td> <%= i.description%> </td>
 				<td> <%= i.updated_at%> </td>
-				<td><%= link_to "Удалить", user_path(i, current_user.admin == true), method: :delete, data: { confirm: "Точно удалить?" }%></td> 
+				<td><%= link_to "Удалить", user_path(i, current_user.admin == true), method: :delete, data: { confirm: "Точно удалить?" }, class: "btn btn-danger"%></td> 
 			</tr>
 
 		<% end %>

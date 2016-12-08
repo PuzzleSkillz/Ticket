@@ -4,8 +4,7 @@ class TicketsController < ApplicationController
   before_action :check_if_admin, only: [ :edit, :update, :destroy]
   def index
     if user_signed_in?
-      
-  	  @tickets = Ticket.where(company_name: @comp)
+  	  @tickets = Ticket.where(company_name: current_user.company_name)
     else
       redirect_to new_user_session_path
     end

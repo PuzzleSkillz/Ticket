@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :find_item, only: []
+  # before_action :find_item, only: [:new, :create]
   before_action :check_if_admin, only: [ :show, :edit, :update, :destroy]
   def index
     if user_signed_in? && current_user.admin == true
@@ -49,16 +49,16 @@ class UsersController < ApplicationController
 
   # /tickets/1 DELETE
   def destroy
-    @user.destroy
+  	@user.destroy
     redirect_to action: "index"
   end
 
   private
 
-  def find_item
-  	@user = User.find(params[:id])
-    render_404 unless @user
-  end
+  # def find_item
+  # 	@user = User.find(params[:id])
+  #   render_404 unless @user
+  # end
 
   def user_ed_params
   	params.require(:user).permit(:email, :login, :company_name, :company_name, :contact_fio, :telephone, :site_name, :password, :password_confirmation, :admin)
@@ -66,6 +66,7 @@ class UsersController < ApplicationController
 
   def check_if_admin
   	@user = User.find(params[:id])
+  	# @user = User.where(id: params [:id])
     render_404 unless @user
   	if user_signed_in?
       render text: "Acces denied", status: 403 unless current_user.admin == true

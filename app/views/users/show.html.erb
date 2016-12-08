@@ -7,3 +7,7 @@
 	<li> Телефон: <%= @user.telephone %></li>
 	<li> Адрес сайта: <%= @user.site_name %></li>
 </ul>
+
+<% if user_signed_in? && current_user.admin == true %>   
+	<%= link_to "Редактировать", edit_user_path, class: "btn btn-default" %>
+<% end %> 
