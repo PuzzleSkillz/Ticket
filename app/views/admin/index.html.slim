@@ -1,0 +1,44 @@
+h1 Задачи
+- if @show_tickets.empty?
+  b Tickets dont created
+- else
+  table.tickets
+    tr
+      th Номер задачи
+      th Заголовок
+      th ФИО администратора
+      th Статус
+    - @show_tickets.each do |i|
+      tr data-item_id="#{i.id}" 
+        td = i.id
+        td = link_to i.title, admin_path(i)
+        td = i.admin_fio
+        td = i.status
+        td = link_to "Удалить", ticket_path(i,current_user.admin == true), method: :delete, data: {confirm: "Точно удалить?"}, class: "btn btn-danger"
+br
+h1 Пользователи
+- if @show_users.empty?
+  b Users dont created
+- else
+  table.users
+    tr
+      th №
+      th Логин
+      th Наименование компании
+      th ФИО контактного лица
+      th Телефон
+      th Адрес сайта
+      th Описание
+      th Дата последнего визита
+    - @show_users.each do |i|
+      tr data-item_id="#{i.id}" 
+        td = i.id
+        td = link_to i.login, user_path(i)
+        td = i.company_name
+        td = i.contact_fio
+        td = i.telephone
+        td = i.site_name
+        td = i.description
+        td = i.updated_at
+        td = link_to "Удалить", user_path(i,current_user.admin == true), method: :delete, data: {confirm: "Точно удалить?"}, class: "btn btn-danger"
+br

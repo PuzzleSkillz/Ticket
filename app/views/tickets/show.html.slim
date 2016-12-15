@@ -1,0 +1,24 @@
+h2= @ticket.title
+ul
+  li
+    | Описание: #{@ticket.content}
+  li
+    | ФИО администратора: #{@ticket.admin_fio}
+  li
+    | Статус: #{@ticket.status}
+  li
+    | Файл:  
+    = link_to "Download", @ticket.file.url(:original)
+    /#{@ticket.file_file_name}
+- if user_signed_in? && current_user.admin == true
+  = link_to "Редактировать", edit_ticket_path, class: "btn btn-default"
+h2 Comments
+- @ticket.comments.each do |f|
+  p
+    = f.user
+    | : #{f.body}
+h2 New comment
+= form_for ([@ticket, @ticket.comments.build]) do |f|
+  = f.text_area :body
+  br/
+  = f.submit "Сохранить"

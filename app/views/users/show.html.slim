@@ -1,0 +1,14 @@
+h2= @user.login
+ul
+  li
+    | email: #{@user.email}
+  li
+    | Наименование компании: #{@user.company_name}
+  li
+    | ФИО контактного лица: #{@user.contact_fio}
+  li
+    | Телефон: #{@user.telephone}
+  li
+    | Адрес сайта: #{@user.site_name}
+- if user_signed_in? && current_user.admin == true
+  = link_to "Редактировать", edit_user_path, class: "btn btn-default"

@@ -1,0 +1,14 @@
+h1 Tickets
+- if @tickets.empty?
+  b Tickets dont created
+- else
+  table.tickets
+    tr
+      th Номер задачи
+      th Заголовок
+      th Статус
+    - @tickets.each do |i|
+      tr data-item_id="#{i.id}" 
+        td= i.id
+        td= link_to i.title, ticket_path(i)
+        td= i.status
