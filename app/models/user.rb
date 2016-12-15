@@ -20,18 +20,13 @@ class User < ApplicationRecord
    self.role = (roles & ROLES).map { |r| 2**ROLES.index(r) }.inject(0, :+)
   end
 
-  def roles # возвращает массив ролей,  например [:receiver] или [:receiver, :manager], etc
+  def roles
    ROLES.reject do |r|
      ((role.to_i || 0) & 2**ROLES.index(r)).zero?
     end
   end
 
-  def has_role?(role) # ждет на вход символ, например :admin
+  def has_role?(role) 
     roles.include?(role)
   end
-
-  # private
-  #   def create_role
-  #     self.roles << Role.find_by_name(:user)  
-  #   end
 end
